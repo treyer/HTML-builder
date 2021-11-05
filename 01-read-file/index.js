@@ -9,6 +9,10 @@ stream.on("readable", () => {
         if (data) console.log(data);
 })
 
-stream.on("end", () => {
-    stream.destroy();
+stream.on("error", (error) => {
+    if(error.code === "ENOENT"){
+        console.log("File not found");
+    } else {
+        console.error(err);
+    }
 })
