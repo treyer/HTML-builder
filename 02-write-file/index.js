@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const process = require('process');
 const os = require('os');
-var readline = require('readline');
+const readline = require('readline');
 
 const filePath = path.join(__dirname, "input.txt");
 const writeableStream = fs.createWriteStream(filePath);
