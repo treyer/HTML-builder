@@ -4,16 +4,10 @@ const path = require('path');
 const sourceFolder = path.join(__dirname, "files");
 const destinationFolder = path.join(__dirname, "files-copy");
 
-let copyDir = (sourceFolder, destinationFolder) => {
+let copyDir = async (sourceFolder, destinationFolder) => {
     try{
-        //check if destination folder exists, create if not
-        fs.access(destinationFolder, err => {
-            if (err) {
-              fs.mkdir(destinationFolder, err => {
-                if(err) throw err;
-              })
-            }
-        })
+        await fs.promises.rm(destinationFolder, { recursive: true, force: true });
+        await fs.promises.mkdir(destinationFolder, { recursive: true });
         //copy files
         fs.promises.readdir(sourceFolder)
         .then(filenames => {
