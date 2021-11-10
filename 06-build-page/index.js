@@ -79,7 +79,14 @@ const replaceTags = async (templateData) => {
     for (let htmlComponent of htmlFiles) {
         const htmlComponentData = await fs.promises.readFile(path.join(componentsSourcePath, htmlComponent));
         const name = path.basename(htmlComponent, '.html');
-        templateData = templateData.replace(`{{${name}}}`, htmlComponentData);
+        let canReplace = true;
+        while(canReplace){
+            if(templateData.indexOf(`{{${name}}}`) !== -1){
+                templateData = templateData.replace(`{{${name}}}`, htmlComponentData);
+            } else {
+                canReplace = false;
+            }
+        }
     }
     return templateData;
 }
